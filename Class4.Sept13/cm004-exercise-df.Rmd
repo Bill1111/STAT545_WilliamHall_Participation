@@ -2,7 +2,7 @@
 title: "Data Frame Exploration"
 output: 
     html_document:
-        theme: cerulean
+        theme: cayman
         toc: true
         keep_md: true
 ---
