@@ -100,7 +100,7 @@ filter(pop > 100000000)
 
 ```{r}
 gapminder %>%
-  filter(pop > 100000000) %>% 
+  filter(pop > 100000000)
   
 
 ```
