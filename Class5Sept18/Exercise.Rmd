@@ -145,13 +145,28 @@ gapminder %>%
 
 
 2. Find all entries of Canada, and entries of Algeria occuring in the '60s. 
+
 3. Find all entries _not_ including Canada and Algeria.
+
+```{r}
+gapminder %>% 
+  filter(!(country == "Canada" | country == "Algeria"))
+```
+
+
+
 
 # Bonus Exercises
 
 If there's time remaining, we'll practice with these three exercises. I'll give you 1 minute for each, then we'll go over the answer.
 
 1. Take all countries in Europe that have a GDP per capita greater than 10000, and select all variables except `gdpPercap`. (Hint: use `-`).
+
+```{r}
+  select(gapminder, continent == "Asia")
+select(gapminder, cont)
+```
+
 
 2. Take the first three columns, and extract the names.
 
