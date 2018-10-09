@@ -270,6 +270,5 @@ I don't think so because the variables are differnt.
 (p <-  tibble(x1 = LETTERS[c(1:3,1)], x2 = 1:4))
 (q <-  tibble(x1 = LETTERS[c(1:3,1)], x3 = 1:4))
 
-left_join()
 ```
 
