@@ -182,7 +182,7 @@ How about growth compared to `1972`?
 ```{r}
 gapminder %>% 
   group_by(country) %>% 
-  mutate(growth = pop -pop[year == 1972])
+  mutate(growth = pop - pop[year == 1972])
 ```
 
 Make a new variable `pop_last_time`, as the "lag-1" population -- that is, the population from the previous entry of that country. Use the `lag` function.
