@@ -407,6 +407,9 @@ Goal here: some exposure to `lubridate`; know it exists.
 
 ```{r}
 
+lubridate::ymd(170511)
+lubridate::ymd("2017-May-11")
+
 ```
 
 2. Get `year`, `month`, `yday`, `wday`, `day`.
