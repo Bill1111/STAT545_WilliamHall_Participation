@@ -215,11 +215,17 @@ Here are the 2007 life expectancies of Asian countries:
 gap_asia_2007 <- gapminder %>% 
   filter(year == 2007, continent == "Asia")
 ggplot(gap_asia_2007, aes(lifeExp, country)) + geom_point()
+
+#this sort of gives you a hodge podge of dots
 ```
 
 Let's use `fct_reorder()` to reorder the countries of `gap_asia_2007` by life Expectancy, and produce the same plot:
 
 ```{r, fig.width=2, fig.height=1}
+
+gap_asia_2007 %>% 
+  mutate(country = fct_reorder(country, lifeExp)) %>% 
+  ggplot(aes(lifeExp, country)) + geom_point()
 
 ```
 
@@ -237,7 +243,15 @@ ggplot(gapminder, aes(continent, lifeExp)) +
 Exercise: Try making the above box plot and violin plots, ordered by median lifeExp. Try other functions to order by by modifying the `.fun` argument.
 
 ```{r, fig.width=2, fig.height=1}
+gapminder %>% 
+  mutate(continent = fct_reorder(continent, lifeExp)) %>% #order continent by median life expectancy
+  ggplot(aes(continent, lifeExp)) +
+  geom_boxplot()
+  
+  geom_violin()
 
+ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_boxplot()
 ```
 
 
@@ -250,6 +264,8 @@ gap_select <- gapminder %>%
   droplevels()
 ggplot(gap_select, aes(year, lifeExp)) +
   geom_line(aes(group=country, colour=country))
+
+#This would be better if we re-ordered the lines.
 ```
 
 Use `fct_reorder2(f, x, y)` to reorder factor `f`:
@@ -260,6 +276,11 @@ Use `fct_reorder2(f, x, y)` to reorder factor `f`:
 Exercise: Reorder the above line graph so that the legend is in order of last life expectancy. Useful for black-and-white printing!
 
 ```{r, fig.width=2, fig.height=1}
+gap_select %>% 
+  mutate(country = fct_reorder2(country, year, lifeExp)) %>% #organize country by year and life expectancy
+  ggplot(aes(year, lifeExp)) +
+  geom_line(aes(group=country, colour=country))
+
 
 ```
 
@@ -274,7 +295,7 @@ Here's how to use `fct_relevel()` to do that. Exercise: modify the code so that:
 
 ```{r}
 gap_asia_2007$country %>% 
-  fct_relevel("Syria") %>% 
+  fct_relevel("Syria","Sweden", after=2) %>% #this puts syria and sweden in the second position
   levels() %>% 
   head()
 ```
@@ -289,8 +310,9 @@ Exercise: modify the following code to also change "Canada" to read "Can". Hint:
 gap_big_north <- gapminder %>% 
   filter(country %in% c("Canada", "United States", "Mexico")) %>% 
   droplevels()
+
 gap_big_north$country %>% 
-  fct_recode("USA" = "United States") %>% 
+  fct_recode("USA" = "United States") %>% #could also use mutate here mutate( "United States" = "USA")
   levels()
 ```
 
@@ -307,7 +329,7 @@ We can arbitrarily combine levels using `fct_collapse()`. For example, combine E
 
 ```{r, fig.width=2, fig.height=1}
 cont %>% 
-  fct_collapse("combo" = c("Europe", "Asia")) %>% 
+  fct_collapse("combo" = c("Europe", "Asia")) %>% #coool making a combo of Europe and Asia
   qplot()
 ```
 
@@ -319,6 +341,13 @@ More practically, we can lump the least frequent levels together as "Other". Mod
 - Note: you can manually specify non-other levels using `fct_other()`.
 
 ```{r, fig.width=2, fig.height=1}
+cont %>% 
+  fct_lump() %>% #Combined all the that weren't Africa and Asia and Europe into other
+  qplot()
+
+cont %>% 
+  fct_lump(n=2) %>% #only keep the top two, then lump everything else
+  qplot()
 
 ```
 
