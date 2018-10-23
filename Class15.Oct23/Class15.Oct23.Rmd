@@ -55,7 +55,12 @@ max(gapminder$lifeExp) - min(gapminder$lifeExp)
 Exercise: turn this into a function! i.e., write a function that returns the max minus min of a vector. Try it out on the gapminder variables.
 
 ```{r}
-max_minus_min <- FILL_THIS_IN
+max_minus_min <- function(x){
+  y <- (max(x) - min(x))
+  return(y)
+}
+
+max_minus_min(gapminder$lifeExp)
 ```
 
 We'll be building on this. Development philosophy [widely attributed to the Spotify development team](http://blog.fastmonkeys.com/?utm_content=bufferc2d6e&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer):
@@ -70,23 +75,31 @@ Check your function using your own eyeballs:
 - Apply to a random uniform vector. Do you get meaningful results?
 
 ```{r}
+max_minus_min(1:10)
 
+max_minus_min(runif(100)) # runif(100) generates 100 random numbers between 0 and 1 -> this should give around 1
 ```
 
 Let's formalize this testing with the `testthat` package. `expect_*()` functions:
 
 ```{r}
-expect_equal(0.1 + 0.2, 0.3)
-expect_identical(0.1 + 0.2, 0.3)
+#These tests will do nothing if the test works, and they will give an error if it doesn't work
+expect_equal(0.1 + 0.2, 0.3) # this will see if .1 + .2 is equal to .3
+expect_identical(0.1 + 0.2, 0.3) # this will see if .1 + .2 is identical to .3 (objects are equal but not identical)
 ```
 
 Add another check to the following unit test, based on the uniform random numbers:
 
 ```{r}
 test_that("Simple cases work", {
-    expect_equal(max_minus_min(1:10), 9)
-    FILL_THIS_IN
+    expect_equal(max_minus_min(1:10), 9) # so we are checking to see if the max_minus_min(1:10) is equal to 9, which is what we want to see
+    expect_lt(max_minus_min(runif(100)), 1) # so we would expect that the product of max_minus_min(runif(100)) would be less than 1
 })
+
+# Test that simple cases work
+expect_equal(max_minus_min(1:10), 9)
+expect_lt(max_minus_min(runif(100)), 1)
+
 ```
 
 ## Try and break your function
@@ -94,16 +107,16 @@ test_that("Simple cases work", {
 Because you will eventually forget the function specifics.
 
 ```{r}
-max_minus_min(numeric(0))
-max_minus_min(gapminder)
-max_minus_min(gapminder$country)
+max_minus_min(numeric(0)) #gives you an error, but not very informative
+max_minus_min(gapminder) #gives you an error, but not very informative
+max_minus_min(gapminder$country) #gives you an error, but not very informative
 ```
 
 These don't break!
 
 ```{r}
-max_minus_min(gapminder[c('lifeExp', 'gdpPercap', 'pop')])
-max_minus_min(c(TRUE, TRUE, FALSE, TRUE, TRUE))
+max_minus_min(gapminder[c('lifeExp', 'gdpPercap', 'pop')]) # this gives you the wrong thing, and doesn't give you an error - DANGEROUS!
+max_minus_min(c(TRUE, TRUE, FALSE, TRUE, TRUE)) # this changes the trues and falses into 1 and 0. No bueno
 ```
 
 We want:
@@ -114,7 +127,7 @@ We want:
 Check out `stopifnot` and `stop`:
 
 ```{r}
-stopifnot(FALSE)
+stopifnot(FALSE) 
 stop("Here's my little error message.")
 ```
 
@@ -124,9 +137,12 @@ Your turn:  Use two methods:
 
 ```{r}
 mmm1 <- function(x) {
-    FILL_THIS_IN
+    stopifnot(!is.numeric(x)) # if what is in the brackets is true, then it stops 
+    stop("X can only be numeric")
     max(x) - min(x)
 }
+
+mmm1(100)
 ```
 
 2. Using `stop` and an `if` statement, Modify the max-min function to:
@@ -134,12 +150,14 @@ mmm1 <- function(x) {
     - return `NULL` if the input is length-0, with a warning using the `warning` function.
 
 ```{r}
+#This is way better than the above function.
 mmm2 <- function(x) {
     if (!is.numeric(x)) {
-        FILL_THIS_IN
+        stop(paste("X can only be numeric. You gave me "), typeof(x))
     }
     max(x) - min(x)
 }
+
 ```
 
 Try breaking the function now:
@@ -160,28 +178,37 @@ mmm2(c(TRUE, TRUE, FALSE, TRUE, TRUE))
 
 ## Naming, and generalizing to quantile difference
 
-Let's generalize the function to take the difference in two quantiles:
+```{r}
+x <- 1:10 #you can call this anything you want x,v,yui - it doesn't matter
+mmm2(x)
+```
+
+
+Let's generalize the function to take the difference in two quantiles. Let's look at the difference between 2 quantiles (e.g. 0.9 quantile - 90% of the values will be below it).
 
 ```{r}
-qd <- function(x, probs) {
-    stopifnot(is.numeric(x))
+qd <- function(x, probs) { #the argument names are x, probs -> this is what you will put into the function
+    stopifnot(is.numeric(x)) 
     if (length(x) == 0) {
         warning("You inputted a length-0 x. Expecting length >=1. Returning NULL.")
         return(NULL)
     } 
-    qvec <- quantile(x, probs)
+    qvec <- quantile(x, probs) # numeric value, probability -> 
     max(qvec) - min(qvec)
 }
+
+quantile(rnorm(100), c(0.1, 0.9)) # 10% of the time, a random draw will be below -1.613105, or above 1.101274
 ```
 
 Try it out:
 
 ```{r}
 x <- runif(100)
-qd(x, c(0.25, 0.75))
+qd(x, c(0.25, 0.75)) # interquartile range - size of boxplot
 IQR(x)
-qd(x, c(0,1))
-mmm2(x)
+
+qd(x, c(0,1)) # these are the max and min functions
+mmm2(x) 
 ```
 
 Why did I call the arguments `x` and `probs`? Check out `?quantile`. 
@@ -190,10 +217,10 @@ If we input a vector stored in some variable, need that variable be named `x`?
 
 ## Defaults
 
-Would be nice to have defaults for `probs`, right? Add them to the below code (which is copied and pasted from above):
+Would be nice to have defaults for `probs`, right? Add them to the below code (which is copied and pasted from above).
 
 ```{r}
-qd2 <- function(x, probs) {
+qd2 <- function(x, probs = c(0,1)) { #this will make it so that the default is c(0,1). But you can still overwrite it. Here you also put in a na.rm = TRUE.
     stopifnot(is.numeric(x))
     if (length(x) == 0) {
         warning("You inputted a length-0 x. Expecting length >=1. Returning NULL.")
@@ -202,6 +229,10 @@ qd2 <- function(x, probs) {
     qvec <- quantile(x, probs)
     max(qvec) - min(qvec)
 }
+
+qd2(rnorm(100)) # because we haven't specified the probs, it will just use (c(0,1))
+
+qd2(rnorm(100), probs = c(0.25, 0.75)) # because we specified the probs, it will use those numbers instead.
 ```
 
 ## NA handling
@@ -216,7 +247,7 @@ qd(v)
 Notice that `quantile()` has a `na.rm` option. Let's use it in our `qd` function. Modify the code below:
 
 ```{r}
-qd2 <- function(x, probs=c(0,1)) {
+qd2 <- function(x, probs=c(0,1), na.rm = TRUE) { # this will automatically remove Na's unless otherwise stated.
     stopifnot(is.numeric(x))
     if (length(x) == 0) {
         warning("You inputted a length-0 x. Expecting length >=1. Returning NULL.")
@@ -231,14 +262,24 @@ qd2 <- function(x, probs=c(0,1)) {
 
 There are other arguments to `quantile`, like `type`, that are not used all that much. Put them in as ellipses:
 
+test_that() is only used when you have done a function.
+stopifnot() is used within code to give you an error message.
+
 ```{r}
-qd2 <- function(x, probs=c(0,1), na.rm=FALSE, FILL_THIS_IN) {
+qd2 <- function(x, probs=c(0,1), na.rm=TRUE, ...) { # Whatever goes there will automatically go into the quantile function
     stopifnot(is.numeric(x))
     if (length(x) == 0) {
         warning("You inputted a length-0 x. Expecting length >=1. Returning NULL.")
         return(NULL)
     } 
-    qvec <- quantile(x, probs, na.rm = na.rm, FILL_THIS_IN)
+    qvec <- quantile(x, probs, na.rm = na.rm, ...) # so you are using this function within your qd2 function
     max(qvec) - min(qvec)
 }
+
+v <- rnorm(100)
+qd2(v, probs = c(0,1), na.rm = TRUE, type = 1) # the type=1 argument is being used from the quantile() function. You get this with the ...
+
+
+
+
 ```
