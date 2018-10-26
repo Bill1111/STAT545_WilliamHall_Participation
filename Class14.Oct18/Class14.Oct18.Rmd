@@ -121,7 +121,7 @@ a <- tibble(gdpPercap = c(500,600,700))
 predict(my_lm, newdata = a) 
 
 
-#So if you wanted to do that prediction thing, what you would do is create a dataset that is just the averages of the data that you had. Then you would run that through the algorythm, and it would forecast the average sales or whatever#
+#So if you wanted to do that prediction thing, what you would do is create a dataset that is just the averages of the data that you had. Then you would run that through the algorythm, and it would forecast the average sales or whatever
 
 ```
 
