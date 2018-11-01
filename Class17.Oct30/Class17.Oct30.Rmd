@@ -6,6 +6,7 @@ editor_options:
 ---
 
 ```{r}
+install.packages("repurrrsive")
 suppressPackageStartupMessages(library(tidyverse)) # Loads purrr, too
 library(repurrrsive) # Contains data examples
 library(listviewer) # For viewing JSON/lists interactively
@@ -28,15 +29,21 @@ In addition:
 
 Vectors: 
 
-- hold multiple entries of the same type.
+- hold multiple entries of the same type - characters, numerics
 - coerced to the least-informative data type in the vector.
-- subset with single square brackets
+- subset with single square brackets "[ ]"
+
+```{r}
+letters[7]
+```
 
 Lists:
 
-- hold multiple entries of anything.
+- hold multiple entries of anything - they don't all have to be the same
 - no entries are coerced (as a result of being able to hold anything)
-- subset with `[`, `[[`, or `$`. 
+- subset with `[` - first car, `[[` - content of first car in train, or `$`. 
+
+
 
 ## Review Vectorization
 
@@ -45,10 +52,12 @@ Lists:
 Examples:
 
 ```{r}
+#This will square everything between 1 and 10
 (1:10) ^ 2
 ```
 
 ```{r}
+#This will multiply 1 by 1, 2 by 2, 3 by 1, 4 by 2, etc.
 (1:10) * (1:2)
 ```
 
@@ -70,7 +79,14 @@ Example:
 2. Use what you know about R to write code that extracts a vector of the first elements of each vector contained in `wesanderson`.
 
 ```{r}
-YOUR_CODE_HERE
+str(wesanderson)
+
+View(wesanderson)
+
+x <- character(0)
+for(i in 1:length(wesanderson)) x[i] <- wesanderson[[i]][1]
+x
+
 ```
 
 `str()` is not always useful! Try checking the structure of `got_chars` (= Game of Thrones characters):
@@ -82,10 +98,14 @@ str(got_chars)
 
 ## Exploring lists
 
-1. `str()`: embrace `list.len` and `max.level`
+So instead of having a nice dataframe now you have nested data. Lists within lists.
+
+1. `str()`: embrace `list.len` - how many elements you want to see, and `max.level`
 
 ```{r}
-str(got_chars)
+str(got_chars, list.len=4, max.level = 2)
+
+got_chars[[1]]
 ```
 
 2. Interactive exploration: `View()` and `listviewer::jsonedit(..., mode = "view")`
@@ -118,25 +138,35 @@ Toy example 1: without using vectorization, take the square root of the followin
 
 ```{r}
 x <- 1:10
-map(FILL_THIS_IN, FILL_THIS_IN)
+sqrt(x) #this is vectorization
+map(x, sqrt) #so this will run the sqrt function on all elements of x
 ```
 
 Toy example 2 (functions on-the-fly): without using vectorization, square each component of `x`:
 
 ```{r}
-map(FILL_THIS_IN, FILL_THIS_IN)
+sqr <- function(x){
+  x^2
+}
+map(x, sqr)
+
+
+map(x, function(w) w^2)
+
 ```
 
-Want a vector to be returned? Must specify the `typeof()` of the vector. Use `map_dbl()` to specify an output vector of type "double" for the above (check out the documentation `?map` for the acceptable vector types):
+Want a vector to be returned (instead of a list which is the default? Must specify the `typeof()` of the vector. Use `map_dbl()` to specify an output vector of type "double" for the above (check out the documentation `?map` for the acceptable vector types):
 
 ```{r}
-map_dbl(x, sqrt)
+map_dbl(x, sqrt) #This will make a numeric vector of the output
+
+map_chr(x, sqrt) #This will make a character vector
 ```
 
 Does your function have other arguments? You can specify them afterwards in the ellipses (`...`).
 
 ```{r}
-map_chr(x, str_c, "potato.", sep="-")
+map_chr(x, str_c, "potato.", sep="-") #this will make a character vector of what you want. Notice the str_c() embedded here.
 ```
 
 ## Your Turn: `purrr` fundamentals
@@ -144,10 +174,19 @@ map_chr(x, str_c, "potato.", sep="-")
 1. Let's retry the `wesanderson` example: use `purrr` to write code that extracts a vector of the first elements of each vector contained in `wesanderson`. Play around with the following, too:
     - Use `head` instead of writing your own function.
     - Try different `map` functions, even the "wrong" types.
-    - Use the ` ``[`` ` function if you're feeling daring.
+    - Use the ` ``[`` ` function if you're feeling daring - the `[`(x,1) is the same as x[1]
 
 ```{r}
-YOUR_CODE_HERE
+#Method 1
+vec1 <- function(x) x[1]
+map_chr(wesanderson, vec1)
+
+#Method 2: head
+map_chr(wesanderson, head, n=1)
+
+#Method 3: 
+map_chr(wesanderson, `[`, 1)
+
 ```
 
 2. Check that each character's list entry in `got_chars` has the same names as everyone else (that is, list component names, not character names). Here's one way to do it:
@@ -168,7 +207,7 @@ We can do the subsetting much easier with these shortcuts: just replace function
 - name you'd like to subset by.
 
 ```{r}
-map_chr(wesanderson, 1) # %>% unname()
+map_chr(wesanderson, 1) # %>% unname() -> this will get rid of the names
 ```
 
 
@@ -183,7 +222,8 @@ map_chr(wesanderson, 1) # %>% unname()
 Note: each character's list entry has a component named `titles` as the 9th entry.
 
 ```{r}
-YOUR_CODE_HERE
+got_chars %>% 
+  map("titles")
 ```
 
 2. For the `got_chars` data:
