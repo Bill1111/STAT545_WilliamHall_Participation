@@ -215,36 +215,42 @@ library(repurrrsive)</code></pre>
 <p>Want to vectorize over two iterables? Use the <code>map2</code> family:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSBjKDEsMiwzKVxuYiA8LSBjKDQsNSw2KVxubWFwMihhLCBiLCBmdW5jdGlvbih4LCB5KSB4KnkpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSBjKDEsMiwzKVxuYiA8LSBjKDQsNSw2KVxubWFwMihhLCBiLCBmdW5jdGlvbih4LCB5KSB4KnkpICN0aGlzIG11bHRpcGxpZXMgZWFjaCBvZiB0aGUgZmlyc3QgbnVtYmVycyBpbiB0aGUgY29sdW1uIHRvZ2V0aGVyLiBSYXRoZXIgdGhhbiB3cml0aW5nIG91dCB0aGUgZnVuY3Rpb24gYmVmb3JlIGhhbmQgYW5kIGNhbGxpbmcgaXQsIHdlIGFyZSB3cml0aW5nIGl0IGRpcmVjdGx5IGludG8gdGhlIG1hcDIoKSBmdW5jdGlvblxuXG5gYGAifQ== -->
 <pre class="r"><code>a &lt;- c(1,2,3)
 b &lt;- c(4,5,6)
-map2(a, b, function(x, y) x*y)</code></pre>
+map2(a, b, function(x, y) x*y) #this multiplies each of the first numbers in the column together. Rather than writing out the function before hand and calling it, we are writing it directly into the map2() function
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihhLCBiLCB+IC54ICogLnkpXG5gYGAifQ== -->
-<pre class="r"><code>map2(a, b, ~ .x * .y)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihhLCBiLCB+IC54ICogLnkpICNjYW4gZG8gdGhpcyB0b29cblxuYGBgIn0= -->
+<pre class="r"><code>map2(a, b, ~ .x * .y) #can do this too
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihhLCBiLCBgKmApXG5gYGAifQ== -->
-<pre class="r"><code>map2(a, b, `*`)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihhLCBiLCBgKmApICNTbyB3ZSBjYW4gZmluZCB0aGUgbXVsdGlwbHkgZnVuY3Rpb24gYnkgcHV0dGluZyBgYCBhcm91bmQgdGhlIG11bHRpcGxlIHNpZ24uXG5gYGAifQ== -->
+<pre class="r"><code>map2(a, b, `*`) #So we can find the multiply function by putting `` around the multiple sign.</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMl9kYmwoYSwgYiwgYCpgKVxuYGBgIn0= -->
-<pre class="r"><code>map2_dbl(a, b, `*`)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMl9kYmwoYSwgYiwgYCpgKVxuXG5gYGAifQ== -->
+<pre class="r"><code>map2_dbl(a, b, `*`)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdICA0IDEwIDE4XG4ifQ== -->
+<pre><code>[1]  4 10 18</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>More than 2? Use the <code>pmap</code> family:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSBjKDEsMiwzKVxuYiA8LSBjKDQsNSw2KVxuYyA8LSBjKDcsOCw5KVxucG1hcChsaXN0KGEsIGIsIGMpLCBmdW5jdGlvbih4LCB5LCB6KSB4KnkqeilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSBjKDEsMiwzKVxuYiA8LSBjKDQsNSw2KVxuYyA8LSBjKDcsOCw5KVxucG1hcChsaXN0KGEsIGIsIGMpLCBmdW5jdGlvbih4LCB5LCB6KSB4KnkqeikgI3RoaXMgbXVsdGlwbGllcyBhbGwgdGhlIGZpcnN0IG9uZXMgdG9nZXRoZXIuXG5gYGAifQ== -->
 <pre class="r"><code>a &lt;- c(1,2,3)
 b &lt;- c(4,5,6)
 c &lt;- c(7,8,9)
-pmap(list(a, b, c), function(x, y, z) x*y*z)</code></pre>
+pmap(list(a, b, c), function(x, y, z) x*y*z) #this multiplies all the first ones together.</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
@@ -263,18 +269,20 @@ pmap(list(a, b, c), function(x, y, z) x*y*z)</code></pre>
 <p>Using the following two vectors…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tbXV0ZSA8LSBjKDEwLCA1MCwgMzUpXG5uYW1lIDwtIGMoXCJQYXJ2ZWVuXCIsIFwiS2F5ZGVuXCIsIFwiU2hhd25cIilcbmBgYCJ9 -->
-<pre class="r"><code>commute &lt;- c(10, 50, 35)
-name &lt;- c(&quot;Parveen&quot;, &quot;Kayden&quot;, &quot;Shawn&quot;)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>use <code>map2_chr()</code> to come up with the following output in three ways:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyX2MobmFtZSwgXCIgdGFrZXMgXCIsIGNvbW11dGUsIFwiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIpXG5gYGAifQ== -->
-<pre class="r"><code>str_c(name, &quot; takes &quot;, commute, &quot; minutes to get to work.&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyX2MobmFtZSwgXCIgdGFrZXMgXCIsIGNvbW11dGUsIFwiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>str_c(name, &quot; takes &quot;, commute, &quot; minutes to get to work.&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUGFydmVlbiB0YWtlcyAxMCBtaW51dGVzIHRvIGdldCB0byB3b3JrLlwiXG5bMl0gXCJLYXlkZW4gdGFrZXMgNTAgbWludXRlcyB0byBnZXQgdG8gd29yay5cIiBcblszXSBcIlNoYXduIHRha2VzIDM1IG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIgIFxuIn0= -->
+<pre><code>[1] &quot;Parveen takes 10 minutes to get to work.&quot;
+[2] &quot;Kayden takes 50 minutes to get to work.&quot; 
+[3] &quot;Shawn takes 35 minutes to get to work.&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol style="list-style-type: decimal">
@@ -282,20 +290,31 @@ name &lt;- c(&quot;Parveen&quot;, &quot;Kayden&quot;, &quot;Shawn&quot;)</code><
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tbV9mdW4gPC0gRklMTF9USElTX0lOXG5tYXAyKEZJTExfVEhJU19JTiwgRklMTF9USElTX0lOLCBGSUxMX1RISVNfSU4pXG5gYGAifQ== -->
-<pre class="r"><code>comm_fun &lt;- FILL_THIS_IN
-map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMl9jaHIobmFtZSwgY29tbXV0ZSwgY29tbV9mdW4pXG5cbmBgYCJ9 -->
+<pre class="r"><code>map2_chr(name, commute, comm_fun)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUGFydmVlbiB0YWtlcyAxMCBtaW51dGVzIHRvIGdldCB0byB3b3JrLlwiXG5bMl0gXCJLYXlkZW4gdGFrZXMgNTAgbWludXRlcyB0byBnZXQgdG8gd29yay5cIiBcblszXSBcIlNoYXduIHRha2VzIDM1IG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIgIFxuIn0= -->
+<pre><code>[1] &quot;Parveen takes 10 minutes to get to work.&quot;
+[2] &quot;Kayden takes 50 minutes to get to work.&quot; 
+[3] &quot;Shawn takes 35 minutes to get to work.&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="2" style="list-style-type: decimal">
-<li>By defining a function “on the fly” within the <code>map2()</code> function.</li>
+<li>By defining a function “on the fly” (in the map2 function) within the <code>map2()</code> function.</li>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihuYW1lLCBjb21tdXRlLCBmdW5jdGlvbih0LCBzKSBGSUxMX1RISVNfSU4pXG5gYGAifQ== -->
-<pre class="r"><code>map2(name, commute, function(t, s) FILL_THIS_IN)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMl9jaHIoY29tbXV0ZSwgbmFtZSwgZnVuY3Rpb24odCwgcykgc3RyX2MocywgXCIgdGFrZXMgXCIsIHQsIFwiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>map2_chr(commute, name, function(t, s) str_c(s, &quot; takes &quot;, t, &quot; minutes to get to work.&quot;))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUGFydmVlbiB0YWtlcyAxMCBtaW51dGVzIHRvIGdldCB0byB3b3JrLlwiXG5bMl0gXCJLYXlkZW4gdGFrZXMgNTAgbWludXRlcyB0byBnZXQgdG8gd29yay5cIiBcblszXSBcIlNoYXduIHRha2VzIDM1IG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIgIFxuIn0= -->
+<pre><code>[1] &quot;Parveen takes 10 minutes to get to work.&quot;
+[2] &quot;Kayden takes 50 minutes to get to work.&quot; 
+[3] &quot;Shawn takes 35 minutes to get to work.&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <ol start="3" style="list-style-type: decimal">
@@ -303,9 +322,15 @@ map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMihuYW1lLCBjb21tdXRlLCB+IEZJTExfVEhJU19JTilcbmBgYCJ9 -->
-<pre class="r"><code>map2(name, commute, ~ FILL_THIS_IN)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWFwMl9jaHIobmFtZSwgY29tbXV0ZSwgfiBzdHJfYyguLjEsIFwiIHRha2VzIFwiLCAuLjIsIFwiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>map2_chr(name, commute, ~ str_c(..1, &quot; takes &quot;, ..2, &quot; minutes to get to work.&quot;))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUGFydmVlbiB0YWtlcyAxMCBtaW51dGVzIHRvIGdldCB0byB3b3JrLlwiXG5bMl0gXCJLYXlkZW4gdGFrZXMgNTAgbWludXRlcyB0byBnZXQgdG8gd29yay5cIiBcblszXSBcIlNoYXduIHRha2VzIDM1IG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuXCIgIFxuIn0= -->
+<pre><code>[1] &quot;Parveen takes 10 minutes to get to work.&quot;
+[2] &quot;Kayden takes 50 minutes to get to work.&quot; 
+[3] &quot;Shawn takes 35 minutes to get to work.&quot;  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -317,14 +342,23 @@ map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
 <p>A tibble can hold a list as a column, too:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKGxpc3Rjb2xfdGliIDwtIHRpYmJsZShcbiAgYSA9IGMoMSwyLDMpLFxuICBiID0gbGlzdCgxLDIsMyksXG4gIGMgPSBsaXN0KHN1bSwgc3FydCwgc3RyX2MpLFxuICBkID0gbGlzdCh4PTEsIHk9c3VtLCB6PWlyaXMpXG4pKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKGxpc3Rjb2xfdGliIDwtIHRpYmJsZShcbiAgYSA9IGMoMSwyLDMpLFxuICBiID0gbGlzdCgxLDIsMyksXG4gIGMgPSBsaXN0KHN1bSwgc3FydCwgc3RyX2MpLFxuICBkID0gbGlzdCh4PTEsIHk9c3VtLCB6PWlyaXMpXG4pKVxuXG5gYGAifQ== -->
 <pre class="r"><code>(listcol_tib &lt;- tibble(
   a = c(1,2,3),
   b = list(1,2,3),
   c = list(sum, sqrt, str_c),
   d = list(x=1, y=sum, z=iris)
-))</code></pre>
+))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDMgeCA0XHUwMDFiWzM5bVxuICAgICAgYSBiICAgICAgICAgYyAgICAgICAgIGQgICAgICAgICAgICAgICAgICAgICBcbiAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxkYmw+XHUwMDFiWzM5bVx1MDAxYlsyM20gXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxsaXN0Plx1MDAxYlszOW1cdTAwMWJbMjNtICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08bGlzdD5cdTAwMWJbMzltXHUwMDFiWzIzbSAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGxpc3Q+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgICAgICAgICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtMVx1MDAxYlszOW0gICAgIDEgXHUwMDFiWzM4OzU7MjQ2bTxkYmwgWzFdPlx1MDAxYlszOW0gXHUwMDFiWzM4OzU7MjQ2bTxidWlsdGluPlx1MDAxYlszOW0gXHUwMDFiWzM4OzU7MjQ2bTxkYmwgWzFdPlx1MDAxYlszOW0gICAgICAgICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtMlx1MDAxYlszOW0gICAgIDIgXHUwMDFiWzM4OzU7MjQ2bTxkYmwgWzFdPlx1MDAxYlszOW0gXHUwMDFiWzM4OzU7MjQ2bTxidWlsdGluPlx1MDAxYlszOW0gXHUwMDFiWzM4OzU7MjQ2bTxidWlsdGluPlx1MDAxYlszOW0gICAgICAgICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtM1x1MDAxYlszOW0gICAgIDMgXHUwMDFiWzM4OzU7MjQ2bTxkYmwgWzFdPlx1MDAxYlszOW0gXHUwMDFiWzM4OzU7MjQ2bTxmbj5cdTAwMWJbMzltICAgICAgXHUwMDFiWzM4OzU7MjQ2bTxkYXRhLmZyYW1lIFsxNTAgw5cgNV0+XHUwMDFiWzM5bVxuIn0= -->
+<pre><code>[38;5;246m# A tibble: 3 x 4[39m
+      a b         c         d                     
+  [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;list&gt;[39m[23m    [3m[38;5;246m&lt;list&gt;[39m[23m    [3m[38;5;246m&lt;list&gt;[39m[23m                
+[38;5;250m1[39m     1 [38;5;246m&lt;dbl [1]&gt;[39m [38;5;246m&lt;builtin&gt;[39m [38;5;246m&lt;dbl [1]&gt;[39m             
+[38;5;250m2[39m     2 [38;5;246m&lt;dbl [1]&gt;[39m [38;5;246m&lt;builtin&gt;[39m [38;5;246m&lt;builtin&gt;[39m             
+[38;5;250m3[39m     3 [38;5;246m&lt;dbl [1]&gt;[39m [38;5;246m&lt;fn&gt;[39m      [38;5;246m&lt;data.frame [150 × 5]&gt;[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Printing to screen doesn’t reveal the contents! <code>str()</code> helps here:</p>
@@ -338,14 +372,29 @@ map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
 <p>Extract a list column in the same way as a vector column:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobGlzdGNvbF90aWIkYSkgICMgVmVjdG9yXG5gYGAifQ== -->
-<pre class="r"><code>print(listcol_tib$a)  # Vector</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobGlzdGNvbF90aWIkYSkgICMgVmVjdG9yXG5cbmBgYCJ9 -->
+<pre class="r"><code>print(listcol_tib$a)  # Vector
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEgMiAzXG4ifQ== -->
+<pre><code>[1] 1 2 3</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobGlzdGNvbF90aWIkYikgICMgTGlzdFxuYGBgIn0= -->
-<pre class="r"><code>print(listcol_tib$b)  # List</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobGlzdGNvbF90aWIkYikgICMgTGlzdFxuXG5gYGAifQ== -->
+<pre class="r"><code>print(listcol_tib$b)  # List
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiW1sxXV1cblsxXSAxXG5cbltbMl1dXG5bMV0gMlxuXG5bWzNdXVxuWzFdIDNcbiJ9 -->
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>This is where <code>map()</code> comes in handy! Let’s make a tibble using the <code>got_chars</code> data, with two columns: “name” and “aliases”, where “aliases” is a list-column (remember that each character can have a number of aliases different than 1):</p>
@@ -355,8 +404,16 @@ map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2FsaWFzIDwtIGdvdF9jaGFycyAlPiUgRklMTF9USElTX0lOXG5gYGAifQ== -->
-<pre class="r"><code>got_alias &lt;- got_chars %&gt;% FILL_THIS_IN</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2NoYXJzW1sxXV0gI3RoaXMgaXMgYWxsIHRoZSBjb250ZW50IG9mIHRoZSBmaXJzdCBjYXIgaW4gdGhpcyBsaXN0IC0+IGl0IGlzIHRoZW9uIGdyZXlqb3lcblxuZ290X2FsaWFzIDwtIGdvdF9jaGFycyAlPiUge1xuICB0aWJibGUobmFtZSA9IG1hcF9jaHIoLiwgXCJuYW1lXCIpLCAjdGhlIG1hcF9jaHIoKSBvdXRwdXQgaGFzIHRvIGJlIGEgY2hhcmFjdGVyIG9mIGxlbmd0aCAxXG4gICAgICAgICBhbGlhc2VzID0gbWFwKC4sIFwiYWxpYXNlc1wiKSkgI21hcCBpcyBtb3JlIGZsZXhpYmxlXG59XG5cbmdvdF9hbGlhcyAjdGhpcyBpcyB0aGUgZnVsbCB0aWJibGVcblxuYGBgIn0= -->
+<pre class="r"><code>got_chars[[1]] #this is all the content of the first car in this list -&gt; it is theon greyjoy
+
+got_alias &lt;- got_chars %&gt;% {
+  tibble(name = map_chr(., &quot;name&quot;), #the map_chr() output has to be a character of length 1
+         aliases = map(., &quot;aliases&quot;)) #map is more flexible
+}
+
+got_alias #this is the full tibble
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -373,11 +430,13 @@ map2(FILL_THIS_IN, FILL_THIS_IN, FILL_THIS_IN)</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKGFsaWFzX2xpc3QgPC0gRklMTF9USElTX0lOKVxubmFtZXMoYWxpYXNfbGlzdCkgPC0gRklMTF9USElTX0lOXG5TVUJTRVRfSEVSRVxuYGBgIn0= -->
-<pre class="r"><code>(alias_list &lt;- FILL_THIS_IN)
-names(alias_list) &lt;- FILL_THIS_IN
-SUBSET_HERE</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2FsaWFzJFtbbmFtZT09XCJNZWxpc2FuZHJlXCJdXVxuXG5gYGAifQ== -->
+<pre class="r"><code>got_alias$[[name==&quot;Melisandre&quot;]]
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IHVuZXhwZWN0ZWQgJ1tbJyBpbiBcImdvdF9hbGlhcyRbW1wiXG4ifQ== -->
+<pre><code>Error: unexpected '[[' in &quot;got_alias$[[&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Approach 2: With piping</p>
@@ -387,9 +446,16 @@ SUBSET_HERE</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2FsaWFzICU+JSBGSUxMX1RISVNfSU5cbmBgYCJ9 -->
-<pre class="r"><code>got_alias %&gt;% FILL_THIS_IN</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2FsaWFzICU+JVxuICB7c2V0TmFtZXMoLiRhbGlhc2VzLCAuJG5hbWUpfSAlPiUgXG4gIGBbW2AoXCJNZWxpc2FuZHJlXCIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>got_alias %&gt;%
+  {setNames(.$aliases, .$name)} %&gt;% 
+  `[[`(&quot;Melisandre&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiVGhlIFJlZCBQcmllc3Rlc3NcIiAgICAgXCJUaGUgUmVkIFdvbWFuXCIgICAgICAgICBcIlRoZSBLaW5nJ3MgUmVkIFNoYWRvd1wiXG5bNF0gXCJMYWR5IFJlZFwiICAgICAgICAgICAgICBcIkxvdCBTZXZlblwiICAgICAgICAgICAgXG4ifQ== -->
+<pre><code>[1] &quot;The Red Priestess&quot;     &quot;The Red Woman&quot;         &quot;The King's Red Shadow&quot;
+[4] &quot;Lady Red&quot;              &quot;Lot Seven&quot;            </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -406,43 +472,81 @@ SUBSET_HERE</code></pre>
 <p>Let’s make a tidy data frame! First, let’s take a closer look at <code>tidyr::unnest()</code> after making a tibble of preferred ice cream flavours:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKGljZWNyZWFtIDwtIHRpYmJsZShcbiAgICBuYW1lID0gYyhcIkphY29iXCIsIFwiRWxlbmFcIiwgXCJNaXRjaGVsbFwiKSxcbiAgICBmbGF2ID0gbGlzdChjKFwic3RyYXdiZXJyeVwiLCBcImNob2NvbGF0ZVwiLCBcImxlbW9uXCIpLFxuICAgICAgICAgICAgICAgIGMoXCJzdHJhY2lhdGVsbGFcIiwgXCJzdHJhd2JlcnJ5XCIpLFxuICAgICAgICAgICAgICAgIGMoXCJnYXJsaWNcIiwgXCJ0aWdlciB0YWlsXCIpKVxuKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKGljZWNyZWFtIDwtIHRpYmJsZShcbiAgICBuYW1lID0gYyhcIkphY29iXCIsIFwiRWxlbmFcIiwgXCJNaXRjaGVsbFwiKSxcbiAgICBmbGF2ID0gbGlzdChjKFwic3RyYXdiZXJyeVwiLCBcImNob2NvbGF0ZVwiLCBcImxlbW9uXCIpLFxuICAgICAgICAgICAgICAgIGMoXCJzdHJhY2lhdGVsbGFcIiwgXCJzdHJhd2JlcnJ5XCIpLFxuICAgICAgICAgICAgICAgIGMoXCJnYXJsaWNcIiwgXCJ0aWdlciB0YWlsXCIpKVxuKSlcblxuYGBgIn0= -->
 <pre class="r"><code>(icecream &lt;- tibble(
     name = c(&quot;Jacob&quot;, &quot;Elena&quot;, &quot;Mitchell&quot;),
     flav = list(c(&quot;strawberry&quot;, &quot;chocolate&quot;, &quot;lemon&quot;),
                 c(&quot;straciatella&quot;, &quot;strawberry&quot;),
                 c(&quot;garlic&quot;, &quot;tiger tail&quot;))
-))</code></pre>
+))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDMgeCAyXHUwMDFiWzM5bVxuICBuYW1lICAgICBmbGF2ICAgICBcbiAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxsaXN0Plx1MDAxYlszOW1cdTAwMWJbMjNtICAgXG5cdTAwMWJbMzg7NTsyNTBtMVx1MDAxYlszOW0gSmFjb2IgICAgXHUwMDFiWzM4OzU7MjQ2bTxjaHIgWzNdPlx1MDAxYlszOW1cblx1MDAxYlszODs1OzI1MG0yXHUwMDFiWzM5bSBFbGVuYSAgICBcdTAwMWJbMzg7NTsyNDZtPGNociBbMl0+XHUwMDFiWzM5bVxuXHUwMDFiWzM4OzU7MjUwbTNcdTAwMWJbMzltIE1pdGNoZWxsIFx1MDAxYlszODs1OzI0Nm08Y2hyIFsyXT5cdTAwMWJbMzltXG4ifQ== -->
+<pre><code>[38;5;246m# A tibble: 3 x 2[39m
+  name     flav     
+  [3m[38;5;246m&lt;chr&gt;[39m[23m    [3m[38;5;246m&lt;list&gt;[39m[23m   
+[38;5;250m1[39m Jacob    [38;5;246m&lt;chr [3]&gt;[39m
+[38;5;250m2[39m Elena    [38;5;246m&lt;chr [2]&gt;[39m
+[38;5;250m3[39m Mitchell [38;5;246m&lt;chr [2]&gt;[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>I can make a tidy data frame <em>without</em> list columns using <code>tidyr::unnest()</code>:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICAgIHVubmVzdChmbGF2KVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICAgIHVubmVzdChmbGF2KVxuXG5gYGAifQ== -->
 <pre class="r"><code>icecream %&gt;% 
-    unnest(flav)</code></pre>
+    unnest(flav)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDcgeCAyXHUwMDFiWzM5bVxuICBuYW1lICAgICBmbGF2ICAgICAgICBcbiAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtMVx1MDAxYlszOW0gSmFjb2IgICAgc3RyYXdiZXJyeSAgXG5cdTAwMWJbMzg7NTsyNTBtMlx1MDAxYlszOW0gSmFjb2IgICAgY2hvY29sYXRlICAgXG5cdTAwMWJbMzg7NTsyNTBtM1x1MDAxYlszOW0gSmFjb2IgICAgbGVtb24gICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtNFx1MDAxYlszOW0gRWxlbmEgICAgc3RyYWNpYXRlbGxhXG5cdTAwMWJbMzg7NTsyNTBtNVx1MDAxYlszOW0gRWxlbmEgICAgc3RyYXdiZXJyeSAgXG5cdTAwMWJbMzg7NTsyNTBtNlx1MDAxYlszOW0gTWl0Y2hlbGwgZ2FybGljICAgICAgXG5cdTAwMWJbMzg7NTsyNTBtN1x1MDAxYlszOW0gTWl0Y2hlbGwgdGlnZXIgdGFpbCAgXG4ifQ== -->
+<pre><code>[38;5;246m# A tibble: 7 x 2[39m
+  name     flav        
+  [3m[38;5;246m&lt;chr&gt;[39m[23m    [3m[38;5;246m&lt;chr&gt;[39m[23m       
+[38;5;250m1[39m Jacob    strawberry  
+[38;5;250m2[39m Jacob    chocolate   
+[38;5;250m3[39m Jacob    lemon       
+[38;5;250m4[39m Elena    straciatella
+[38;5;250m5[39m Elena    strawberry  
+[38;5;250m6[39m Mitchell garlic      
+[38;5;250m7[39m Mitchell tiger tail  </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>How would I subset all people that like strawberry ice cream? We can either use the tidy data, or the list data directly:</p>
 <p>From “normal” tidy data:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICAgIHVubmVzdChmbGF2KSAlPiUgXG4gICAgZmlsdGVyKGZsYXYgPT0gXCJzdHJhd2JlcnJ5XCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICAgIHVubmVzdChmbGF2KSAlPiUgXG4gICAgZmlsdGVyKGZsYXYgPT0gXCJzdHJhd2JlcnJ5XCIpXG5cbmBgYCJ9 -->
 <pre class="r"><code>icecream %&gt;% 
     unnest(flav) %&gt;% 
-    filter(flav == &quot;strawberry&quot;)</code></pre>
+    filter(flav == &quot;strawberry&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDIgeCAyXHUwMDFiWzM5bVxuICBuYW1lICBmbGF2ICAgICAgXG4gIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtICAgICBcblx1MDAxYlszODs1OzI1MG0xXHUwMDFiWzM5bSBKYWNvYiBzdHJhd2JlcnJ5XG5cdTAwMWJbMzg7NTsyNTBtMlx1MDAxYlszOW0gRWxlbmEgc3RyYXdiZXJyeVxuIn0= -->
+<pre><code>[38;5;246m# A tibble: 2 x 2[39m
+  name  flav      
+  [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m     
+[38;5;250m1[39m Jacob strawberry
+[38;5;250m2[39m Elena strawberry</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>From list-column data:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICBmaWx0ZXIobWFwX2xnbChmbGF2LCB+IEZJTExfVEhJU19JTikpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaWNlY3JlYW0gJT4lIFxuICBmaWx0ZXIobWFwX2xnbChmbGF2LCB+IGFueSgueCA9PSBcInN0cmF3YmVycnlcIikpKVxuXG5gYGAifQ== -->
 <pre class="r"><code>icecream %&gt;% 
-  filter(map_lgl(flav, ~ FILL_THIS_IN))</code></pre>
+  filter(map_lgl(flav, ~ any(.x == &quot;strawberry&quot;)))
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDIgeCAyXHUwMDFiWzM5bVxuICBuYW1lICBmbGF2ICAgICBcbiAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxsaXN0Plx1MDAxYlszOW1cdTAwMWJbMjNtICAgXG5cdTAwMWJbMzg7NTsyNTBtMVx1MDAxYlszOW0gSmFjb2IgXHUwMDFiWzM4OzU7MjQ2bTxjaHIgWzNdPlx1MDAxYlszOW1cblx1MDAxYlszODs1OzI1MG0yXHUwMDFiWzM5bSBFbGVuYSBcdTAwMWJbMzg7NTsyNDZtPGNociBbMl0+XHUwMDFiWzM5bVxuIn0= -->
+<pre><code>[38;5;246m# A tibble: 2 x 2[39m
+  name  flav     
+  [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;list&gt;[39m[23m   
+[38;5;250m1[39m Jacob [38;5;246m&lt;chr [3]&gt;[39m
+[38;5;250m2[39m Elena [38;5;246m&lt;chr [2]&gt;[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -451,9 +555,28 @@ SUBSET_HERE</code></pre>
 <p><code>unnest()</code> the <code>got_alias</code> tibble. Hint: there should be a hiccup. Check out the <code>str()</code>ucture of <code>got_alias</code> – are all elements of the list column vectors? Would using <code>tidyr::drop_na()</code> be a good idea here?</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRklMTF9USElTX0lOXG5gYGAifQ== -->
-<pre class="r"><code>FILL_THIS_IN</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ290X2FsaWFzICU+JSBcbiAgICBkcm9wX25hKCkgJT4lIFxuICAgIHVubmVzdChhbGlhc2VzKVxuXG5gYGAifQ== -->
+<pre class="r"><code>got_alias %&gt;% 
+    drop_na() %&gt;% 
+    unnest(aliases)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDExNCB4IDJcdTAwMWJbMzltXG4gICBuYW1lICAgICAgICAgICAgIGFsaWFzZXMgICAgICAgICAgIFxuICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgICAgICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSAgICAgICAgICAgICBcblx1MDAxYlszODs1OzI1MG0gMVx1MDAxYlszOW0gVGhlb24gR3JleWpveSAgICBQcmluY2Ugb2YgRm9vbHMgICBcblx1MDAxYlszODs1OzI1MG0gMlx1MDAxYlszOW0gVGhlb24gR3JleWpveSAgICBUaGVvbiBUdXJuY2xvYWsgICBcblx1MDAxYlszODs1OzI1MG0gM1x1MDAxYlszOW0gVGhlb24gR3JleWpveSAgICBSZWVrICAgICAgICAgICAgICBcblx1MDAxYlszODs1OzI1MG0gNFx1MDAxYlszOW0gVGhlb24gR3JleWpveSAgICBUaGVvbiBLaW5zbGF5ZXIgICBcblx1MDAxYlszODs1OzI1MG0gNVx1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBUaGUgSW1wICAgICAgICAgICBcblx1MDAxYlszODs1OzI1MG0gNlx1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBIYWxmbWFuICAgICAgICAgICBcblx1MDAxYlszODs1OzI1MG0gN1x1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBUaGUgYm95bWFuICAgICAgICBcblx1MDAxYlszODs1OzI1MG0gOFx1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBHaWFudCBvZiBMYW5uaXN0ZXJcblx1MDAxYlszODs1OzI1MG0gOVx1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBMb3JkIFR5d2luJ3MgRG9vbSBcblx1MDAxYlszODs1OzI1MG0xMFx1MDAxYlszOW0gVHlyaW9uIExhbm5pc3RlciBMb3JkIFR5d2luJ3MgQmFuZSBcblx1MDAxYlszODs1OzI0Nm0jIC4uLiB3aXRoIDEwNCBtb3JlIHJvd3NcdTAwMWJbMzltXG4ifQ== -->
+<pre><code>[38;5;246m# A tibble: 114 x 2[39m
+   name             aliases           
+   [3m[38;5;246m&lt;chr&gt;[39m[23m            [3m[38;5;246m&lt;chr&gt;[39m[23m             
+[38;5;250m 1[39m Theon Greyjoy    Prince of Fools   
+[38;5;250m 2[39m Theon Greyjoy    Theon Turncloak   
+[38;5;250m 3[39m Theon Greyjoy    Reek              
+[38;5;250m 4[39m Theon Greyjoy    Theon Kinslayer   
+[38;5;250m 5[39m Tyrion Lannister The Imp           
+[38;5;250m 6[39m Tyrion Lannister Halfman           
+[38;5;250m 7[39m Tyrion Lannister The boyman        
+[38;5;250m 8[39m Tyrion Lannister Giant of Lannister
+[38;5;250m 9[39m Tyrion Lannister Lord Tywin's Doom 
+[38;5;250m10[39m Tyrion Lannister Lord Tywin's Bane 
+[38;5;246m# ... with 104 more rows[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>We can also do the opposite with <code>tidyr::nest()</code>. Try it with the <code>iris</code> data frame:</p>
@@ -463,9 +586,20 @@ SUBSET_HERE</code></pre>
 </ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRklMTF9USElTX0lOXG5gYGAifQ== -->
-<pre class="r"><code>FILL_THIS_IN</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXJpcyAlPiUgXG4gIGdyb3VwX2J5KFNwZWNpZXMpICU+JSBcbiAgbmVzdCgpXG5cbmBgYCJ9 -->
+<pre class="r"><code>iris %&gt;% 
+  group_by(Species) %&gt;% 
+  nest()
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDMgeCAyXHUwMDFiWzM5bVxuICBTcGVjaWVzICAgIGRhdGEgICAgICAgICAgICAgXG4gIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08ZmN0Plx1MDAxYlszOW1cdTAwMWJbMjNtICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxsaXN0Plx1MDAxYlszOW1cdTAwMWJbMjNtICAgICAgICAgICBcblx1MDAxYlszODs1OzI1MG0xXHUwMDFiWzM5bSBzZXRvc2EgICAgIFx1MDAxYlszODs1OzI0Nm08dGliYmxlIFs1MCDDlyA0XT5cdTAwMWJbMzltXG5cdTAwMWJbMzg7NTsyNTBtMlx1MDAxYlszOW0gdmVyc2ljb2xvciBcdTAwMWJbMzg7NTsyNDZtPHRpYmJsZSBbNTAgw5cgNF0+XHUwMDFiWzM5bVxuXHUwMDFiWzM4OzU7MjUwbTNcdTAwMWJbMzltIHZpcmdpbmljYSAgXHUwMDFiWzM4OzU7MjQ2bTx0aWJibGUgWzUwIMOXIDRdPlx1MDAxYlszOW1cbiJ9 -->
+<pre><code>[38;5;246m# A tibble: 3 x 2[39m
+  Species    data             
+  [3m[38;5;246m&lt;fct&gt;[39m[23m      [3m[38;5;246m&lt;list&gt;[39m[23m           
+[38;5;250m1[39m setosa     [38;5;246m&lt;tibble [50 × 4]&gt;[39m
+[38;5;250m2[39m versicolor [38;5;246m&lt;tibble [50 × 4]&gt;[39m
+[38;5;250m3[39m virginica  [38;5;246m&lt;tibble [50 × 4]&gt;[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Keep the nested <code>iris</code> data frame above going! Keep piping:</p>
@@ -511,7 +645,7 @@ SUBSET_HERE</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2xhc3MgTWVldGluZyA0IFdvcmtzaGVldCIKb3V0cHV0OgogICAgaHRtbF9ub3RlYm9vazoKICAgICAgICB0b2M6IHRydWUKICAgICAgICB0aGVtZTogY2VydWxlYW4KICAgICAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKZWRpdG9yX29wdGlvbnM6IAogIGNodW5rX291dHB1dF90eXBlOiBpbmxpbmUKLS0tCgpgYGB7cn0Kc3VwcHJlc3NQYWNrYWdlU3RhcnR1cE1lc3NhZ2VzKGxpYnJhcnkodGlkeXZlcnNlKSkKbGlicmFyeShyZXB1cnJyc2l2ZSkKYGBgCgojIFJlc291cmNlcwoKQWxsIGFyZSBmcm9tIFtKZW5ueSdzIGBwdXJycmAgdHV0b3JpYWxdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvKS4gU3BlY2lmaWNhbGx5OgogCi0gUGFyYWxsZWwgbWFwcGluZzogW0plbm55J3MgIlNwZWNpZnlpbmcgdGhlIGZ1bmN0aW9uIGluIG1hcCgpICsgcGFyYWxsZWwgbWFwcGluZyJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMwM19tYXAtZnVuY3Rpb24tc3ludGF4Lmh0bWwjcGFyYWxsZWxfbWFwKQotIExpc3QgY29sdW1ucyBpbiBkYXRhIGZyYW1lczsgbmVzdGluZzogW0plbm55J3MgIkxpc3QgQ29sdW1ucyJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMxM19saXN0LWNvbHVtbnMuaHRtbCkuCgpUaGUgYWxsLWVuY29tcGFzc2luZyBhcHBsaWNhdGlvbiBuZWFyIHRoZSBib3R0b20gb2YgdGhpcyB3b3Jrc2hlZXQgaXMgZnJvbSBbSmVubnkncyAiU2FtcGxlIGZyb20gZ3JvdXBzLCBuIHZhcmllcyBieSBncm91cCJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMxMl9kaWZmZXJlbnQtc2l6ZWQtc2FtcGxlcy5odG1sKQoKCgojIFBhcmFsbGVsIE1hcHBpbmcKCldlJ3JlIGdvaW5nIHRvIHdvcmsgd2l0aCB0b3kgY2FzZXMgZmlyc3QgYmVmb3JlIHRoZSBtb3JlIHJlYWxpc3RpYyBkYXRhIGFuYWx5dGljIHRhc2tzLCBiZWNhdXNlIHRoZXkgYXJlIGVhc2llciB0byBsZWFybi4KCldhbnQgdG8gdmVjdG9yaXplIG92ZXIgdHdvIGl0ZXJhYmxlcz8gVXNlIHRoZSBgbWFwMmAgZmFtaWx5OgoKYGBge3J9CmEgPC0gYygxLDIsMykKYiA8LSBjKDQsNSw2KQptYXAyKGEsIGIsIGZ1bmN0aW9uKHgsIHkpIHgqeSkKYGBgCmBgYHtyfQptYXAyKGEsIGIsIH4gLnggKiAueSkKYGBgCmBgYHtyfQptYXAyKGEsIGIsIGAqYCkKYGBgCmBgYHtyfQptYXAyX2RibChhLCBiLCBgKmApCmBgYAoKTW9yZSB0aGFuIDI/IFVzZSB0aGUgYHBtYXBgIGZhbWlseToKCmBgYHtyfQphIDwtIGMoMSwyLDMpCmIgPC0gYyg0LDUsNikKYyA8LSBjKDcsOCw5KQpwbWFwKGxpc3QoYSwgYiwgYyksIGZ1bmN0aW9uKHgsIHksIHopIHgqeSp6KQpgYGAKYGBge3J9CnBtYXAobGlzdChhLCBiLCBjKSwgfiAuLjEgKiAuLjIgKiAuLjMpCmBgYApgYGB7cn0KcG1hcF9kYmwobGlzdChhLCBiLCBjKSwgfiAuLjEgKiAuLjIgKiAuLjMpCmBgYAoKIyMgWW91ciBUdXJuCgpVc2luZyB0aGUgZm9sbG93aW5nIHR3byB2ZWN0b3JzLi4uCgpgYGB7cn0KY29tbXV0ZSA8LSBjKDEwLCA1MCwgMzUpCm5hbWUgPC0gYygiUGFydmVlbiIsICJLYXlkZW4iLCAiU2hhd24iKQpgYGAKCnVzZSBgbWFwMl9jaHIoKWAgdG8gY29tZSB1cCB3aXRoIHRoZSBmb2xsb3dpbmcgb3V0cHV0IGluIHRocmVlIHdheXM6CgpgYGB7cn0Kc3RyX2MobmFtZSwgIiB0YWtlcyAiLCBjb21tdXRlLCAiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuIikKYGBgCgoxLiBCeSBkZWZpbmluZyBhIGZ1bmN0aW9uIGJlZm9yZSBmZWVkaW5nIGl0IGludG8gYG1hcDIoKWAgLS0gY2FsbCBpdCBgY29tbV9mdW5gLgoKYGBge3J9CmNvbW1fZnVuIDwtIEZJTExfVEhJU19JTgptYXAyKEZJTExfVEhJU19JTiwgRklMTF9USElTX0lOLCBGSUxMX1RISVNfSU4pCmBgYAoKMi4gQnkgZGVmaW5pbmcgYSBmdW5jdGlvbiAib24gdGhlIGZseSIgd2l0aGluIHRoZSBgbWFwMigpYCBmdW5jdGlvbi4KCmBgYHtyfQptYXAyKG5hbWUsIGNvbW11dGUsIGZ1bmN0aW9uKHQsIHMpIEZJTExfVEhJU19JTikKYGBgCgozLiBCeSBkZWZpbmluZyBhIGZvcm11bGEuCgpgYGB7cn0KbWFwMihuYW1lLCBjb21tdXRlLCB+IEZJTExfVEhJU19JTikKYGBgCgoKIyBMaXN0IGNvbHVtbnMKCiMjIFdoYXQgYXJlIHRoZXk/CgpBIHRpYmJsZSBjYW4gaG9sZCBhIGxpc3QgYXMgYSBjb2x1bW4sIHRvbzoKCmBgYHtyfQoobGlzdGNvbF90aWIgPC0gdGliYmxlKAogIGEgPSBjKDEsMiwzKSwKICBiID0gbGlzdCgxLDIsMyksCiAgYyA9IGxpc3Qoc3VtLCBzcXJ0LCBzdHJfYyksCiAgZCA9IGxpc3QoeD0xLCB5PXN1bSwgej1pcmlzKQopKQpgYGAKClByaW50aW5nIHRvIHNjcmVlbiBkb2Vzbid0IHJldmVhbCB0aGUgY29udGVudHMhIGBzdHIoKWAgaGVscHMgaGVyZToKCmBgYHtyfQpzdHIobGlzdGNvbF90aWIpCmBgYAoKRXh0cmFjdCBhIGxpc3QgY29sdW1uIGluIHRoZSBzYW1lIHdheSBhcyBhIHZlY3RvciBjb2x1bW46CgpgYGB7cn0KcHJpbnQobGlzdGNvbF90aWIkYSkgICMgVmVjdG9yCmBgYApgYGB7cn0KcHJpbnQobGlzdGNvbF90aWIkYikgICMgTGlzdApgYGAKClRoaXMgaXMgd2hlcmUgYG1hcCgpYCBjb21lcyBpbiBoYW5keSEgTGV0J3MgbWFrZSBhIHRpYmJsZSB1c2luZyB0aGUgYGdvdF9jaGFyc2AgZGF0YSwgd2l0aCB0d28gY29sdW1uczogIm5hbWUiIGFuZCAiYWxpYXNlcyIsIHdoZXJlICJhbGlhc2VzIiBpcyBhIGxpc3QtY29sdW1uIChyZW1lbWJlciB0aGF0IGVhY2ggY2hhcmFjdGVyIGNhbiBoYXZlIGEgbnVtYmVyIG9mIGFsaWFzZXMgZGlmZmVyZW50IHRoYW4gMSk6CgoxLiBQaXBlIGBnb3RfY2hhcnNgIGludG8gYHtgIHdpdGggYHRpYmJsZSgpYC4KMi4gU3BlY2lmeSB0aGUgY29sdW1ucyB3aXRoIGBwdXJycmAgbWFwcGluZ3MuCgpgYGB7cn0KZ290X2FsaWFzIDwtIGdvdF9jaGFycyAlPiUgRklMTF9USElTX0lOCmBgYAoKV3JpdGUgdGhlIHNvbHV0aW9uIGRvd24gY2FyZWZ1bGx5IC0tIHdlJ2xsIGJlIHJlZmVycmluZyB0byBgZ290X2FsaWFzYCBsYXRlci4gCgojIyBNYWtpbmc6IFlvdXIgVHVybgoKRXh0cmFjdCB0aGUgYWxpYXNlcyBvZiBNZWxpc2FuZHJlIChhIGNoYXJhY3RlciBmcm9tIEdhbWUgb2YgVGhyb25lcykgZnJvbSB0aGUgYGdvdF9hbGlhc2AgZGF0YSBmcmFtZSB3ZSBqdXN0IG1hZGUuIFRyeSB0d28gYXBwcm9hY2hlczoKCkFwcHJvYWNoIDE6IFdpdGhvdXQgcGlwaW5nCgoxLiBNYWtlIGEgbGlzdCBvZiBhbGlhc2VzIGJ5IGV4dHJhY3RpbmcgdGhlIGxpc3QgY29sdW1uIGluIGBnb3RfYWxpYXNgLgoyLiBTZXQgdGhlIG5hbWVzIG9mIHRoaXMgbmV3IGxpc3QgYXMgdGhlIGNoYXJhY3RlciBuYW1lcyAoZnJvbSB0aGUgb3RoZXIgY29sdW1uIG9mIGBnb3RfY2hhcnNgKS4KMy4gU3Vic2V0IHRoZSBuZXdseS1uYW1lZCBsaXN0IHRvIE1lbGlzYW5kcmUuCgpgYGB7cn0KKGFsaWFzX2xpc3QgPC0gRklMTF9USElTX0lOKQpuYW1lcyhhbGlhc19saXN0KSA8LSBGSUxMX1RISVNfSU4KU1VCU0VUX0hFUkUKYGBgCgpBcHByb2FjaCAyOiBXaXRoIHBpcGluZwoKMS4gUGlwZSBgZ290X2FsaWFzYCBpbnRvIHRoZSBgc2V0TmFtZXMoKWAgZnVuY3Rpb24sIHRvIG1ha2UgYSBsaXN0IG9mIGFsaWFzZXMsIG5hbWVkIGFmdGVyIHRoZSBwZXJzb24uIERvIHlvdSBuZWVkIGB7YCBoZXJlPwoyLiBUaGVuLCBwaXBlIHRoYXQgaW50byBhIHN1YnNldHRpbmcgZnVuY3Rpb24gdG8gc3Vic2V0IE1lbGlzYW5kcmUuCgpgYGB7cn0KZ290X2FsaWFzICU+JSBGSUxMX1RISVNfSU4KYGBgCgojIyBOZXN0aW5nL1VubmVzdGluZzsgT3BlcmF0aW5nCgpfX1F1ZXN0aW9uX186IFdoYXQgd291bGQgdGlkeSBkYXRhIG9mIGBnb3RfYWxpYXNgIGxvb2sgbGlrZT8gUmVtZW1iZXIgd2hhdCBgZ290X2FsaWFzYCBob2xkczoKCmBgYHtyfQpnb3RfYWxpYXMKYGBgCgpMZXQncyBtYWtlIGEgdGlkeSBkYXRhIGZyYW1lISBGaXJzdCwgbGV0J3MgdGFrZSBhIGNsb3NlciBsb29rIGF0IGB0aWR5cjo6dW5uZXN0KClgIGFmdGVyIG1ha2luZyBhIHRpYmJsZSBvZiBwcmVmZXJyZWQgaWNlIGNyZWFtIGZsYXZvdXJzOgoKYGBge3J9CihpY2VjcmVhbSA8LSB0aWJibGUoCiAgICBuYW1lID0gYygiSmFjb2IiLCAiRWxlbmEiLCAiTWl0Y2hlbGwiKSwKICAgIGZsYXYgPSBsaXN0KGMoInN0cmF3YmVycnkiLCAiY2hvY29sYXRlIiwgImxlbW9uIiksCiAgICAgICAgICAgICAgICBjKCJzdHJhY2lhdGVsbGEiLCAic3RyYXdiZXJyeSIpLAogICAgICAgICAgICAgICAgYygiZ2FybGljIiwgInRpZ2VyIHRhaWwiKSkKKSkKYGBgCgpJIGNhbiBtYWtlIGEgdGlkeSBkYXRhIGZyYW1lIF93aXRob3V0XyBsaXN0IGNvbHVtbnMgdXNpbmcgYHRpZHlyOjp1bm5lc3QoKWA6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogICAgdW5uZXN0KGZsYXYpCmBgYAoKSG93IHdvdWxkIEkgc3Vic2V0IGFsbCBwZW9wbGUgdGhhdCBsaWtlIHN0cmF3YmVycnkgaWNlIGNyZWFtPyBXZSBjYW4gZWl0aGVyIHVzZSB0aGUgdGlkeSBkYXRhLCBvciB0aGUgbGlzdCBkYXRhIGRpcmVjdGx5OgoKRnJvbSAibm9ybWFsIiB0aWR5IGRhdGE6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogICAgdW5uZXN0KGZsYXYpICU+JSAKICAgIGZpbHRlcihmbGF2ID09ICJzdHJhd2JlcnJ5IikKYGBgCgpGcm9tIGxpc3QtY29sdW1uIGRhdGE6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogIGZpbHRlcihtYXBfbGdsKGZsYXYsIH4gRklMTF9USElTX0lOKSkKYGBgCgoKIyMgTmVzdGluZy9Vbm5lc3Rpbmc6IFlvdXIgVHVybgoKYHVubmVzdCgpYCB0aGUgYGdvdF9hbGlhc2AgdGliYmxlLiBIaW50OiB0aGVyZSBzaG91bGQgYmUgYSBoaWNjdXAuIENoZWNrIG91dCB0aGUgYHN0cigpYHVjdHVyZSBvZiBgZ290X2FsaWFzYCAtLSBhcmUgYWxsIGVsZW1lbnRzIG9mIHRoZSBsaXN0IGNvbHVtbiB2ZWN0b3JzPyBXb3VsZCB1c2luZyBgdGlkeXI6OmRyb3BfbmEoKWAgYmUgYSBnb29kIGlkZWEgaGVyZT8KCmBgYHtyfQpGSUxMX1RISVNfSU4KYGBgCgpXZSBjYW4gYWxzbyBkbyB0aGUgb3Bwb3NpdGUgd2l0aCBgdGlkeXI6Om5lc3QoKWAuIFRyeSBpdCB3aXRoIHRoZSBgaXJpc2AgZGF0YSBmcmFtZToKCjEuIEdyb3VwIGJ5IHNwZWNpZXMuCjIuIGBuZXN0KClgIQoKYGBge3J9CkZJTExfVEhJU19JTgpgYGAKCktlZXAgdGhlIG5lc3RlZCBgaXJpc2AgZGF0YSBmcmFtZSBhYm92ZSBnb2luZyEgS2VlcCBwaXBpbmc6CgotIEZpdCBhIGxpbmVhciByZWdyZXNzaW9uIG1vZGVsIHdpdGggYGxtKClgIHRvIGBTZXBhbC5MZW5ndGggfiBTZXBhbC5XaWR0aGAsIHNlcGFyYXRlbHkgZm9yIGVhY2ggc3BlY2llcy4gCiAgICAtIEluc3BlY3QsIHRvIHNlZSB3aGF0J3MgZ29pbmcgb24uCi0gR2V0IHRoZSBzbG9wZSBhbmQgaW50ZXJjZXB0IGluZm9ybWF0aW9uIGJ5IGFwcGx5aW5nIGBicm9vbTo6dGlkeSgpYCB0byB0aGUgb3V0cHV0IG9mIGBsbSgpYC4KLSBgdW5uZXN0YCB0aGUgb3V0cHV0dGVkIGRhdGEgZnJhbWVzIGZyb20gYGJyb29tOjp0aWR5KClgLgoKIyBBcHBsaWNhdGlvbjogVGltZSByZW1haW5pbmc/CgpJZiB0aW1lIHJlbWFpbnMsIGhlcmUgaXMgYSBnb29kIGV4ZXJjaXNlIHRvIHB1dCBldmVyeXRoaW5nIHRvZ2V0aGVyLiAKCltIaWxhcnkgUGFya2VyIHR3ZWV0XShodHRwczovL3R3aXR0ZXIuY29tL2hzcHRlci9zdGF0dXMvNzM5ODg2MjQ0NjkyMjk1NjgwKTogIkhvdyBkbyB5b3Ugc2FtcGxlIGZyb20gZ3JvdXBzLCB3aXRoIGEgZGlmZmVyZW50IHNhbXBsZSBzaXplIGZvciBlYWNoIGdyb3VwPyIKCltTb2x1dGlvbiBieSBKZW5ueSBCcnlhbl0oaHR0cHM6Ly9qZW5ueWJjLmdpdGh1Yi5pby9wdXJyci10dXRvcmlhbC9sczEyX2RpZmZlcmVudC1zaXplZC1zYW1wbGVzLmh0bWwpOgoKMS4gTmVzdCBieSBzcGVjaWVzLgoyLiBTcGVjaWZ5IHNhbXBsZSBzaXplIGZvciBlYWNoIGdyb3VwLgozLiBEbyB0aGUgc3Vic2FtcGxpbmcgb2YgZWFjaCBncm91cC4KCkxldCdzIGdpdmUgaXQgYSB0cnk6CgpgYGB7cn0KCmBgYAoKCiMgU3VtbWFyeToKCi0gdGliYmxlcyBjYW4gaG9sZCBjb2x1bW5zIHRoYXQgYXJlIGxpc3RzLCB0b28hCiAgICAtIFVzZWZ1bCBmb3IgaG9sZGluZyB2YXJpYWJsZS1sZW5ndGggZGF0YS4KICAgIC0gVXNlZnVsIGZvciBob2xkaW5nIHVudXN1YWwgZGF0YSAoZXhhbXBsZTogYSBwcm9iYWJpbGl0eSBkZW5zaXR5IGZ1bmN0aW9uKQogICAgLSBXaGVyZWFzIGBkcGx5cmAgbWFwcyB2ZWN0b3JzIG9mIGxlbmd0aCBgbmAgdG8gYG5gLCBvciBgbmAgdG8gYDFgLi4uCiAgICAtIC4uLmxpc3QgY29sdW1ucyBhbGxvdyB1cyB0byBtYXAgYG5gIHRvIGFueSBnZW5lcmFsIGxlbmd0aCBgbWAgKGV4YW1wbGU6IHJlZ3Jlc3Npb24gb24gZ3JvdXBzKQotIGBwdXJycmAgaXMgYSB1c2VmdWwgdG9vbCBmb3Igb3BlcmF0aW5nIG9uIGxpc3QtY29sdW1ucy4KLSBgcHVycnJgIGFsbG93cyBmb3IgcGFyYWxsZWwgbWFwcGluZyBvZiBpdGVyYWJsZXMgKHZlY3RvcnMvbGlzdHMpIHdpdGggdGhlIGBtYXAyYCBhbmQgYHBtYXBgIGZhbWlsaWVzLgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2xhc3MgTWVldGluZyA0IFdvcmtzaGVldCIKb3V0cHV0OgogICAgaHRtbF9ub3RlYm9vazoKICAgICAgICB0b2M6IHRydWUKICAgICAgICB0aGVtZTogY2VydWxlYW4KICAgICAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKZWRpdG9yX29wdGlvbnM6IAogIGNodW5rX291dHB1dF90eXBlOiBpbmxpbmUKLS0tCgpgYGB7cn0Kc3VwcHJlc3NQYWNrYWdlU3RhcnR1cE1lc3NhZ2VzKGxpYnJhcnkodGlkeXZlcnNlKSkKbGlicmFyeShyZXB1cnJyc2l2ZSkKYGBgCgojIFJlc291cmNlcwoKQWxsIGFyZSBmcm9tIFtKZW5ueSdzIGBwdXJycmAgdHV0b3JpYWxdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvKS4gU3BlY2lmaWNhbGx5OgogCi0gUGFyYWxsZWwgbWFwcGluZzogW0plbm55J3MgIlNwZWNpZnlpbmcgdGhlIGZ1bmN0aW9uIGluIG1hcCgpICsgcGFyYWxsZWwgbWFwcGluZyJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMwM19tYXAtZnVuY3Rpb24tc3ludGF4Lmh0bWwjcGFyYWxsZWxfbWFwKQotIExpc3QgY29sdW1ucyBpbiBkYXRhIGZyYW1lczsgbmVzdGluZzogW0plbm55J3MgIkxpc3QgQ29sdW1ucyJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMxM19saXN0LWNvbHVtbnMuaHRtbCkuCgpUaGUgYWxsLWVuY29tcGFzc2luZyBhcHBsaWNhdGlvbiBuZWFyIHRoZSBib3R0b20gb2YgdGhpcyB3b3Jrc2hlZXQgaXMgZnJvbSBbSmVubnkncyAiU2FtcGxlIGZyb20gZ3JvdXBzLCBuIHZhcmllcyBieSBncm91cCJdKGh0dHBzOi8vamVubnliYy5naXRodWIuaW8vcHVycnItdHV0b3JpYWwvbHMxMl9kaWZmZXJlbnQtc2l6ZWQtc2FtcGxlcy5odG1sKQoKCgojIFBhcmFsbGVsIE1hcHBpbmcKCldlJ3JlIGdvaW5nIHRvIHdvcmsgd2l0aCB0b3kgY2FzZXMgZmlyc3QgYmVmb3JlIHRoZSBtb3JlIHJlYWxpc3RpYyBkYXRhIGFuYWx5dGljIHRhc2tzLCBiZWNhdXNlIHRoZXkgYXJlIGVhc2llciB0byBsZWFybi4KCldhbnQgdG8gdmVjdG9yaXplIG92ZXIgdHdvIGl0ZXJhYmxlcz8gVXNlIHRoZSBgbWFwMmAgZmFtaWx5OgoKYGBge3J9CmEgPC0gYygxLDIsMykKYiA8LSBjKDQsNSw2KQptYXAyKGEsIGIsIGZ1bmN0aW9uKHgsIHkpIHgqeSkgI3RoaXMgbXVsdGlwbGllcyBlYWNoIG9mIHRoZSBmaXJzdCBudW1iZXJzIGluIHRoZSBjb2x1bW4gdG9nZXRoZXIuIFJhdGhlciB0aGFuIHdyaXRpbmcgb3V0IHRoZSBmdW5jdGlvbiBiZWZvcmUgaGFuZCBhbmQgY2FsbGluZyBpdCwgd2UgYXJlIHdyaXRpbmcgaXQgZGlyZWN0bHkgaW50byB0aGUgbWFwMigpIGZ1bmN0aW9uCgpgYGAKYGBge3J9Cm1hcDIoYSwgYiwgfiAueCAqIC55KSAjY2FuIGRvIHRoaXMgdG9vCgpgYGAKYGBge3J9Cm1hcDIoYSwgYiwgYCpgKSAjU28gd2UgY2FuIGZpbmQgdGhlIG11bHRpcGx5IGZ1bmN0aW9uIGJ5IHB1dHRpbmcgYGAgYXJvdW5kIHRoZSBtdWx0aXBsZSBzaWduLgpgYGAKYGBge3J9Cm1hcDJfZGJsKGEsIGIsIGAqYCkgI1RoaXMgd2lsbCBnaXZlIHVzIGEgbnVtZXJpYyB2ZWN0b3Igb3V0cHV0CmBgYAoKTW9yZSB0aGFuIDI/IFVzZSB0aGUgYHBtYXBgIGZhbWlseToKCmBgYHtyfQphIDwtIGMoMSwyLDMpCmIgPC0gYyg0LDUsNikKYyA8LSBjKDcsOCw5KQpwbWFwKGxpc3QoYSwgYiwgYyksIGZ1bmN0aW9uKHgsIHksIHopIHgqeSp6KSAjdGhpcyBtdWx0aXBsaWVzIGFsbCB0aGUgZmlyc3Qgb25lcyB0b2dldGhlci4KYGBgCmBgYHtyfQpwbWFwKGxpc3QoYSwgYiwgYyksIH4gLi4xICogLi4yICogLi4zKQpgYGAKYGBge3J9CnBtYXBfZGJsKGxpc3QoYSwgYiwgYyksIH4gLi4xICogLi4yICogLi4zKQpgYGAKCiMjIFlvdXIgVHVybgoKVXNpbmcgdGhlIGZvbGxvd2luZyB0d28gdmVjdG9ycy4uLgoKYGBge3J9CmNvbW11dGUgPC0gYygxMCwgNTAsIDM1KQpuYW1lIDwtIGMoIlBhcnZlZW4iLCAiS2F5ZGVuIiwgIlNoYXduIikKYGBgCgp1c2UgYG1hcDJfY2hyKClgIHRvIGNvbWUgdXAgd2l0aCB0aGUgZm9sbG93aW5nIG91dHB1dCBpbiB0aHJlZSB3YXlzOgoKYGBge3J9CnN0cl9jKG5hbWUsICIgdGFrZXMgIiwgY29tbXV0ZSwgIiBtaW51dGVzIHRvIGdldCB0byB3b3JrLiIpCmBgYAoKMS4gQnkgZGVmaW5pbmcgYSBmdW5jdGlvbiBiZWZvcmUgZmVlZGluZyBpdCBpbnRvIGBtYXAyKClgIC0tIGNhbGwgaXQgYGNvbW1fZnVuYC4KCmBgYHtyfQpjb21tX2Z1biA8LSBmdW5jdGlvbihzLHQpIHsKICBzdHJfYyhzLCAiIHRha2VzICIsIHQsICIgbWludXRlcyB0byBnZXQgdG8gd29yay4iKQp9CgptYXAyX2NocihuYW1lLCBjb21tdXRlLCBjb21tX2Z1bikKCmBgYAoKMi4gQnkgZGVmaW5pbmcgYSBmdW5jdGlvbiAib24gdGhlIGZseSIgKGluIHRoZSBtYXAyIGZ1bmN0aW9uKSB3aXRoaW4gdGhlIGBtYXAyKClgIGZ1bmN0aW9uLgoKYGBge3J9Cm1hcDJfY2hyKGNvbW11dGUsIG5hbWUsIGZ1bmN0aW9uKHQsIHMpIHN0cl9jKHMsICIgdGFrZXMgIiwgdCwgIiBtaW51dGVzIHRvIGdldCB0byB3b3JrLiIpKQpgYGAKCjMuIEJ5IGRlZmluaW5nIGEgZm9ybXVsYS4KCmBgYHtyfQptYXAyX2NocihuYW1lLCBjb21tdXRlLCB+IHN0cl9jKC54LCAiIHRha2VzICIsIC55LCAiIG1pbnV0ZXMgdG8gZ2V0IHRvIHdvcmsuIikpCgptYXAyX2NocihuYW1lLCBjb21tdXRlLCB+IHN0cl9jKC4uMSwgIiB0YWtlcyAiLCAuLjIsICIgbWludXRlcyB0byBnZXQgdG8gd29yay4iKSkKCmBgYAoKCiMgTGlzdCBjb2x1bW5zCgojIyBXaGF0IGFyZSB0aGV5PwoKQSB0aWJibGUgY2FuIGhvbGQgYSBsaXN0IGFzIGEgY29sdW1uLCB0b286CgpgYGB7cn0KKGxpc3Rjb2xfdGliIDwtIHRpYmJsZSgKICBhID0gYygxLDIsMyksCiAgYiA9IGxpc3QoMSwyLDMpLAogIGMgPSBsaXN0KHN1bSwgc3FydCwgc3RyX2MpLAogIGQgPSBsaXN0KHg9MSwgeT1zdW0sIHo9aXJpcykKKSkKYGBgCgpQcmludGluZyB0byBzY3JlZW4gZG9lc24ndCByZXZlYWwgdGhlIGNvbnRlbnRzISBgc3RyKClgIGhlbHBzIGhlcmU6CgpgYGB7cn0Kc3RyKGxpc3Rjb2xfdGliKQpgYGAKCkV4dHJhY3QgYSBsaXN0IGNvbHVtbiBpbiB0aGUgc2FtZSB3YXkgYXMgYSB2ZWN0b3IgY29sdW1uOgoKYGBge3J9CnByaW50KGxpc3Rjb2xfdGliJGEpICAjIFZlY3RvcgpgYGAKYGBge3J9CnByaW50KGxpc3Rjb2xfdGliJGIpICAjIExpc3QKYGBgCgpUaGlzIGlzIHdoZXJlIGBtYXAoKWAgY29tZXMgaW4gaGFuZHkhIExldCdzIG1ha2UgYSB0aWJibGUgdXNpbmcgdGhlIGBnb3RfY2hhcnNgIGRhdGEsIHdpdGggdHdvIGNvbHVtbnM6ICJuYW1lIiBhbmQgImFsaWFzZXMiLCB3aGVyZSAiYWxpYXNlcyIgaXMgYSBsaXN0LWNvbHVtbiAocmVtZW1iZXIgdGhhdCBlYWNoIGNoYXJhY3RlciBjYW4gaGF2ZSBhIG51bWJlciBvZiBhbGlhc2VzIGRpZmZlcmVudCB0aGFuIDEpOgoKMS4gUGlwZSBgZ290X2NoYXJzYCBpbnRvIGB7YCB3aXRoIGB0aWJibGUoKWAuCjIuIFNwZWNpZnkgdGhlIGNvbHVtbnMgd2l0aCBgcHVycnJgIG1hcHBpbmdzLgoKYGBge3J9CmdvdF9jaGFyc1tbMV1dICN0aGlzIGlzIGFsbCB0aGUgY29udGVudCBvZiB0aGUgZmlyc3QgY2FyIGluIHRoaXMgbGlzdCAtPiBpdCBpcyB0aGVvbiBncmV5am95Cgpnb3RfYWxpYXMgPC0gZ290X2NoYXJzICU+JSB7CiAgdGliYmxlKG5hbWUgPSBtYXBfY2hyKC4sICJuYW1lIiksICN0aGUgbWFwX2NocigpIG91dHB1dCBoYXMgdG8gYmUgYSBjaGFyYWN0ZXIgb2YgbGVuZ3RoIDEKICAgICAgICAgYWxpYXNlcyA9IG1hcCguLCAiYWxpYXNlcyIpKSAjbWFwIGlzIG1vcmUgZmxleGlibGUKfQoKZ290X2FsaWFzICN0aGlzIGlzIHRoZSBmdWxsIHRpYmJsZQoKYGBgCgpXcml0ZSB0aGUgc29sdXRpb24gZG93biBjYXJlZnVsbHkgLS0gd2UnbGwgYmUgcmVmZXJyaW5nIHRvIGBnb3RfYWxpYXNgIGxhdGVyLiAKCiMjIE1ha2luZzogWW91ciBUdXJuCgpFeHRyYWN0IHRoZSBhbGlhc2VzIG9mIE1lbGlzYW5kcmUgKGEgY2hhcmFjdGVyIGZyb20gR2FtZSBvZiBUaHJvbmVzKSBmcm9tIHRoZSBgZ290X2FsaWFzYCBkYXRhIGZyYW1lIHdlIGp1c3QgbWFkZS4gVHJ5IHR3byBhcHByb2FjaGVzOgoKQXBwcm9hY2ggMTogV2l0aG91dCBwaXBpbmcKCjEuIE1ha2UgYSBsaXN0IG9mIGFsaWFzZXMgYnkgZXh0cmFjdGluZyB0aGUgbGlzdCBjb2x1bW4gaW4gYGdvdF9hbGlhc2AuCjIuIFNldCB0aGUgbmFtZXMgb2YgdGhpcyBuZXcgbGlzdCBhcyB0aGUgY2hhcmFjdGVyIG5hbWVzIChmcm9tIHRoZSBvdGhlciBjb2x1bW4gb2YgYGdvdF9jaGFyc2ApLgozLiBTdWJzZXQgdGhlIG5ld2x5LW5hbWVkIGxpc3QgdG8gTWVsaXNhbmRyZS4KCmBgYHtyfQooYWxpYXNfbGlzdCA8LSBnb3RfYWxpYXMkYWxpYXNlcykgI3NvIHlvdSBtYWtlIGEgbGlzdCBvZiBhbGwgdGhlIGFsaWFzZXMgZmlyc3QKbmFtZXMoYWxpYXNfbGlzdCkgPC0gZ290X2FsaWFzJG5hbWUgI3RoZW4geW91IG5hbWUgZWFjaCBzZXQgb2YgY2hhcmFjdGVycyB3aXRoIHRoZSBuYW1lcyBmcm9tIHRoZSBnb3RfYWxpYXMKYWxpYXNfbGlzdAoKYWxpYXNfbGlzdFtbIk1lbGlzYW5kcmUiXV0KYGBgCgpBcHByb2FjaCAyOiBXaXRoIHBpcGluZwoKMS4gUGlwZSBgZ290X2FsaWFzYCBpbnRvIHRoZSBgc2V0TmFtZXMoKWAgZnVuY3Rpb24sIHRvIG1ha2UgYSBsaXN0IG9mIGFsaWFzZXMsIG5hbWVkIGFmdGVyIHRoZSBwZXJzb24uIERvIHlvdSBuZWVkIGB7YCBoZXJlPwoyLiBUaGVuLCBwaXBlIHRoYXQgaW50byBhIHN1YnNldHRpbmcgZnVuY3Rpb24gdG8gc3Vic2V0IE1lbGlzYW5kcmUuCgpgYGB7cn0KZ290X2FsaWFzICU+JQogIHtzZXROYW1lcyguJGFsaWFzZXMsIC4kbmFtZSl9ICU+JSAKICBgW1tgKCJNZWxpc2FuZHJlIikgI3RoaXMgaXMgdGhlIG5hbWUgYXMgeFtbIk1lbGlzYW5kcmUiXV0KYGBgCgojIyBOZXN0aW5nL1VubmVzdGluZzsgT3BlcmF0aW5nCgpfX1F1ZXN0aW9uX186IFdoYXQgd291bGQgdGlkeSBkYXRhIG9mIGBnb3RfYWxpYXNgIGxvb2sgbGlrZT8gUmVtZW1iZXIgd2hhdCBgZ290X2FsaWFzYCBob2xkczoKCmBgYHtyfQpnb3RfYWxpYXMKYGBgCgpMZXQncyBtYWtlIGEgdGlkeSBkYXRhIGZyYW1lISBGaXJzdCwgbGV0J3MgdGFrZSBhIGNsb3NlciBsb29rIGF0IGB0aWR5cjo6dW5uZXN0KClgIGFmdGVyIG1ha2luZyBhIHRpYmJsZSBvZiBwcmVmZXJyZWQgaWNlIGNyZWFtIGZsYXZvdXJzOgoKYGBge3J9CihpY2VjcmVhbSA8LSB0aWJibGUoCiAgICBuYW1lID0gYygiSmFjb2IiLCAiRWxlbmEiLCAiTWl0Y2hlbGwiKSwKICAgIGZsYXYgPSBsaXN0KGMoInN0cmF3YmVycnkiLCAiY2hvY29sYXRlIiwgImxlbW9uIiksCiAgICAgICAgICAgICAgICBjKCJzdHJhY2lhdGVsbGEiLCAic3RyYXdiZXJyeSIpLAogICAgICAgICAgICAgICAgYygiZ2FybGljIiwgInRpZ2VyIHRhaWwiKSkKKSkKYGBgCgpJIGNhbiBtYWtlIGEgdGlkeSBkYXRhIGZyYW1lIF93aXRob3V0XyBsaXN0IGNvbHVtbnMgdXNpbmcgYHRpZHlyOjp1bm5lc3QoKWA6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogICAgdW5uZXN0KGZsYXYpICN0aGlzIG1ha2VzIGVhY2ggb2YgdGhvc2UgZGlmZmVyZW50IGljZSBjcmVhbSBmbGF2b3VycyBhIGRpZmZlcmVudCByb3cgd2l0aCB0aGUgc2FtZSBwZXJzb24ncyBuYW1lCmBgYAoKSG93IHdvdWxkIEkgc3Vic2V0IGFsbCBwZW9wbGUgdGhhdCBsaWtlIHN0cmF3YmVycnkgaWNlIGNyZWFtPyBXZSBjYW4gZWl0aGVyIHVzZSB0aGUgdGlkeSBkYXRhLCBvciB0aGUgbGlzdCBkYXRhIGRpcmVjdGx5OgoKRnJvbSAibm9ybWFsIiB0aWR5IGRhdGE6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogICAgdW5uZXN0KGZsYXYpICU+JSAKICAgIGZpbHRlcihmbGF2ID09ICJzdHJhd2JlcnJ5IikKYGBgCgpGcm9tIGxpc3QtY29sdW1uIGRhdGE6CgpgYGB7cn0KaWNlY3JlYW0gJT4lIAogIGZpbHRlcihtYXBfbGdsKGZsYXYsIH4gYW55KC54ID09ICJzdHJhd2JlcnJ5IikpKQpgYGAKCgojIyBOZXN0aW5nL1VubmVzdGluZzogWW91ciBUdXJuCgpgdW5uZXN0KClgIHRoZSBgZ290X2FsaWFzYCB0aWJibGUuIEhpbnQ6IHRoZXJlIHNob3VsZCBiZSBhIGhpY2N1cC4gQ2hlY2sgb3V0IHRoZSBgc3RyKClgdWN0dXJlIG9mIGBnb3RfYWxpYXNgIC0tIGFyZSBhbGwgZWxlbWVudHMgb2YgdGhlIGxpc3QgY29sdW1uIHZlY3RvcnM/IFdvdWxkIHVzaW5nIGB0aWR5cjo6ZHJvcF9uYSgpYCBiZSBhIGdvb2QgaWRlYSBoZXJlPwoKYGBge3J9CmdvdF9hbGlhcyAlPiUgCiAgICBkcm9wX25hKCkgJT4lIAogICAgdW5uZXN0KGFsaWFzZXMpCmBgYAoKV2UgY2FuIGFsc28gZG8gdGhlIG9wcG9zaXRlIHdpdGggYHRpZHlyOjpuZXN0KClgLiBUcnkgaXQgd2l0aCB0aGUgYGlyaXNgIGRhdGEgZnJhbWU6CgoxLiBHcm91cCBieSBzcGVjaWVzLgoyLiBgbmVzdCgpYCEKCmBgYHtyfQppcmlzICU+JSAKICBncm91cF9ieShTcGVjaWVzKSAlPiUgCiAgbmVzdCgpCmBgYAoKS2VlcCB0aGUgbmVzdGVkIGBpcmlzYCBkYXRhIGZyYW1lIGFib3ZlIGdvaW5nISBLZWVwIHBpcGluZzoKCi0gRml0IGEgbGluZWFyIHJlZ3Jlc3Npb24gbW9kZWwgd2l0aCBgbG0oKWAgdG8gYFNlcGFsLkxlbmd0aCB+IFNlcGFsLldpZHRoYCwgc2VwYXJhdGVseSBmb3IgZWFjaCBzcGVjaWVzLiAKICAgIC0gSW5zcGVjdCwgdG8gc2VlIHdoYXQncyBnb2luZyBvbi4KLSBHZXQgdGhlIHNsb3BlIGFuZCBpbnRlcmNlcHQgaW5mb3JtYXRpb24gYnkgYXBwbHlpbmcgYGJyb29tOjp0aWR5KClgIHRvIHRoZSBvdXRwdXQgb2YgYGxtKClgLgotIGB1bm5lc3RgIHRoZSBvdXRwdXR0ZWQgZGF0YSBmcmFtZXMgZnJvbSBgYnJvb206OnRpZHkoKWAuCgojIEFwcGxpY2F0aW9uOiBUaW1lIHJlbWFpbmluZz8KCklmIHRpbWUgcmVtYWlucywgaGVyZSBpcyBhIGdvb2QgZXhlcmNpc2UgdG8gcHV0IGV2ZXJ5dGhpbmcgdG9nZXRoZXIuIAoKW0hpbGFyeSBQYXJrZXIgdHdlZXRdKGh0dHBzOi8vdHdpdHRlci5jb20vaHNwdGVyL3N0YXR1cy83Mzk4ODYyNDQ2OTIyOTU2ODApOiAiSG93IGRvIHlvdSBzYW1wbGUgZnJvbSBncm91cHMsIHdpdGggYSBkaWZmZXJlbnQgc2FtcGxlIHNpemUgZm9yIGVhY2ggZ3JvdXA/IgoKW1NvbHV0aW9uIGJ5IEplbm55IEJyeWFuXShodHRwczovL2plbm55YmMuZ2l0aHViLmlvL3B1cnJyLXR1dG9yaWFsL2xzMTJfZGlmZmVyZW50LXNpemVkLXNhbXBsZXMuaHRtbCk6CgoxLiBOZXN0IGJ5IHNwZWNpZXMuCjIuIFNwZWNpZnkgc2FtcGxlIHNpemUgZm9yIGVhY2ggZ3JvdXAuCjMuIERvIHRoZSBzdWJzYW1wbGluZyBvZiBlYWNoIGdyb3VwLgoKTGV0J3MgZ2l2ZSBpdCBhIHRyeToKCmBgYHtyfQoKYGBgCgoKIyBTdW1tYXJ5OgoKLSB0aWJibGVzIGNhbiBob2xkIGNvbHVtbnMgdGhhdCBhcmUgbGlzdHMsIHRvbyEKICAgIC0gVXNlZnVsIGZvciBob2xkaW5nIHZhcmlhYmxlLWxlbmd0aCBkYXRhLgogICAgLSBVc2VmdWwgZm9yIGhvbGRpbmcgdW51c3VhbCBkYXRhIChleGFtcGxlOiBhIHByb2JhYmlsaXR5IGRlbnNpdHkgZnVuY3Rpb24pCiAgICAtIFdoZXJlYXMgYGRwbHlyYCBtYXBzIHZlY3RvcnMgb2YgbGVuZ3RoIGBuYCB0byBgbmAsIG9yIGBuYCB0byBgMWAuLi4KICAgIC0gLi4ubGlzdCBjb2x1bW5zIGFsbG93IHVzIHRvIG1hcCBgbmAgdG8gYW55IGdlbmVyYWwgbGVuZ3RoIGBtYCAoZXhhbXBsZTogcmVncmVzc2lvbiBvbiBncm91cHMpCi0gYHB1cnJyYCBpcyBhIHVzZWZ1bCB0b29sIGZvciBvcGVyYXRpbmcgb24gbGlzdC1jb2x1bW5zLgotIGBwdXJycmAgYWxsb3dzIGZvciBwYXJhbGxlbCBtYXBwaW5nIG9mIGl0ZXJhYmxlcyAodmVjdG9ycy9saXN0cykgd2l0aCB0aGUgYG1hcDJgIGFuZCBgcG1hcGAgZmFtaWxpZXMuCg==</div>
 
 
 
